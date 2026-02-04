@@ -5,21 +5,36 @@ import joblib
 import numpy as np
 
 app = FastAPI()
-model = joblib.load("diabetes_model.pkl")
 
-class DiabetesInput(BaseModel):
-    Pregnancies: int
-    Glucose: float
-    BloodPressure: float
-    BMI: float
-    Age: int
+# Load trained model
+model = joblib.load("it_package_model.pkl")
+
+class CareerInput(BaseModel):
+    Experience: int
+    CurrentPackage: float
+    SkillsCount: int
+    Certifications: int
+    CodingLevel: int
 
 @app.get("/")
 def read_root():
-    return {"message": "Diabetes Prediction API is live"}
+    return {"message": "IT Career Upskilling Prediction API is live 🚀"}
 
 @app.post("/predict")
-def predict(data: DiabetesInput):
-    input_data = np.array([[data.Pregnancies, data.Glucose, data.BloodPressure, data.BMI, data.Age]])
+def predict(data: CareerInput):
+    input_data = np.array([[
+        data.Experience,
+        data.CurrentPackage,
+        data.SkillsCount,
+        data.Certifications,
+        data.CodingLevel
+    ]])
+
     prediction = model.predict(input_data)[0]
-    return {"diabetic": bool(prediction)}
+
+    return {
+        "upskill_required": bool(prediction),
+        "message": "Upskilling recommended for better package 💡" 
+                   if prediction == 1 
+                   else "Good package level 👍"
+    }
