@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: diabetes-api
+  name: it-career-api
   labels:
-    app: diabetes-api
+    app: it-career-api
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: diabetes-api
+      app: it-career-api
   template:
     metadata:
       labels:
-        app: diabetes-api
+        app: it-career-api
     spec:
       containers:
-      - name: diabetes-api
-        image: your-dockerhub-username/diabetes-api:latest
+      - name: it-career-api
+        image: ayushman50/it-career-api:latest
         ports:
         - containerPort: 8000
         imagePullPolicy: Always
@@ -24,10 +24,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: diabetes-api-service
+  name: it-career-api-service
 spec:
   selector:
-    app: diabetes-api
+    app: it-career-api
   ports:
     - protocol: TCP
       port: 80
