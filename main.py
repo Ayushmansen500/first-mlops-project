@@ -34,7 +34,14 @@ def predict(data: CareerInput):
 
     return {
         "upskill_required": bool(prediction),
-        "message": "Upskilling recommended for better package 💡" 
-                   if prediction == 1 
-                   else "Good package level 👍"
+        "career_status": (
+            "Strong Package Level 💼"
+            if prediction == 0
+            else "Upskilling Recommended 🚀"
+        ),
+        "suggestion": (
+            "Focus on niche skills like System Design, Cloud Architecture, or Leadership"
+            if prediction == 0
+            else "Learn DevOps, Cloud and AI to unlock 10+ LPA opportunities"
+        )
     }
